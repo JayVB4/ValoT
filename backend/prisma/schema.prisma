@@ -1,0 +1,77 @@
+datasource db {
+  provider = "postgresql" // Adjust to your database type
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Host {
+  id         Int      @id @default(autoincrement())
+  pass       String
+  created_at DateTime @default(now())
+  Tourny     Tourny[]
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  team_id    Int      
+  username   String
+  pass       String
+  created_at DateTime @default(now())
+  phone_no   Int
+  discord    String
+  team       Team     @relation(fields: [team_id], references: [id])
+}
+
+model Tourny {
+  id           Int      @id @default(autoincrement())
+  title        String
+  body         String
+  rules        String
+  host_id      Int
+  status       String
+  created_at   DateTime @default(now())
+  start_date   DateTime // Separate start date
+  end_date     DateTime // Separate end date
+  team_size    Int
+  prize_pool   Int
+  host         Host     @relation(fields: [host_id], references: [id])
+  matches      Match[]
+  reg_teams    RegTeams[]
+}
+
+
+model Team {
+  id   Int    @id @default(autoincrement())
+  name String 
+  users User[]
+  reg_teams RegTeams[]
+  match_teams MatchTeams[]
+}
+
+model Match {
+  id         Int      @id @default(autoincrement())
+  tourny_id  Int      
+  match_time DateTime // Use DateTime for match_time
+  tourny     Tourny   @relation(fields: [tourny_id], references: [id])
+  match_teams MatchTeams[]
+}
+
+model RegTeams {
+  id       Int    @id @default(autoincrement())
+  team_id  Int
+  tourny_id Int
+  team     Team   @relation(fields: [team_id], references: [id])
+  tourny   Tourny @relation(fields: [tourny_id], references: [id])
+}
+
+model MatchTeams {
+  id       Int    @id @default(autoincrement())
+  match_id Int
+  team_id  Int
+  results  Int
+  match    Match  @relation(fields: [match_id], references: [id])
+  team     Team   @relation(fields: [team_id], references: [id])
+}
