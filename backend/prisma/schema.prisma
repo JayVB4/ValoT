@@ -3,6 +3,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  HOST
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,6 +17,7 @@ model Host {
   pass       String
   created_at DateTime @default(now())
   Tourny     Tourny[]
+  role      Role     @default(HOST)
 }
 
 model User {
@@ -22,6 +28,8 @@ model User {
   created_at DateTime @default(now())
   phone_no   Int
   discord    String
+  role      Role     @default(USER)
+
   team       Team     @relation(fields: [team_id], references: [id])
 }
 

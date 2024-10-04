@@ -7,8 +7,7 @@ import Navbar from "../components/Navbar"; // Use relative path
 export function App() {
   return (
     <div>
-      <Navbar />
-      <AddTournament /> 
+      <AddTournament/>
     </div>
   );
 }
