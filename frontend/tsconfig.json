@@ -14,7 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/utils/*": ["src/utils/*"]  // Add this line for alias support
+       "@/*": ["src/*"] // Alias @ to src folder
     },
     "jsx": "react-jsx",
     "allowJs": false,

@@ -1,8 +1,8 @@
 import { LogOut } from "lucide-react";
-import WelcomeImg from "../../assets/welcome.svg";
-import { deleteCookies, fetchCookieToken, fetchFromCookie } from "@/utils/LoginUtils/user.utils";
+import WelcomeImg from "../../../assets/welcome.svg";
+import { deleteCookies, fetchCookieToken, fetchFromCookie } from "../../../utils/LoginUtils/user.utils";
 import { useEffect } from "react";
-import { clientApiFetch } from "@/utils/LoginUtils/api.utils";
+import { clientApiFetch } from "../../../utils/LoginUtils/api.utils";
 import { useNavigate } from "react-router-dom";
 
 function AppPage() {

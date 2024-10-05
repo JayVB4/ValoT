@@ -15,10 +15,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Login from './pages/LoginPages/Login'
+import Register from './pages/LoginPages/Register'
+import AppPage from './pages/LoginPages/AppPage'
 import './index.css'
-import Login from './pages/Login-Pages/Login'
-import Register from './pages/Login-Pages/Register'
-import AppPage from './pages/Login-Pages/AppPage'
 
 const router = createBrowserRouter([
   {

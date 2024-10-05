@@ -1,5 +1,5 @@
-import LoginForm from "@/components/LoginForm";
-import GradientSplit from "@/layouts/GradientSplit";
+import LoginForm from "../../../components/LoginComponents/LoginForm";
+import GradientSplit from "../../../layouts/GradientSplit";
 import { Link } from "react-router-dom";
 
 function Login() {

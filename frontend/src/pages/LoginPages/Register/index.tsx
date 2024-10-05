@@ -1,5 +1,5 @@
-import RegisterForm from "@/components/RegisterForm";
-import GradientSplit from "@/layouts/GradientSplit";
+import RegisterForm from "../../../components/LoginComponents/RegisterForm";
+import GradientSplit from "../../../layouts/GradientSplit";
 import { Link } from "react-router-dom";
 
 function Register(){
