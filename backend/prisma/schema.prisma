@@ -17,19 +17,28 @@ model Host {
   pass       String
   created_at DateTime @default(now())
   Tourny     Tourny[]
-  role      Role     @default(HOST)
+  role       Role     @default(HOST)
 }
 
 model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String   @unique
+  password  String   @db.VarChar(255)
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model Player { // Renamed from User to Player
   id         Int      @id @default(autoincrement())
   team_id    Int      
   username   String
-  pass       String
   created_at DateTime @default(now())
   phone_no   Int
   discord    String
-  role      Role     @default(USER)
-
+  role       Role     @default(USER)
   team       Team     @relation(fields: [team_id], references: [id])
 }
 
@@ -50,12 +59,11 @@ model Tourny {
   reg_teams    RegTeams[]
 }
 
-
 model Team {
-  id   Int    @id @default(autoincrement())
-  name String 
-  users User[]
-  reg_teams RegTeams[]
+  id         Int    @id @default(autoincrement())
+  name       String 
+  players    Player[] // Changed from users to players
+  reg_teams   RegTeams[]
   match_teams MatchTeams[]
 }
 
