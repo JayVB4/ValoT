@@ -3,7 +3,7 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { AppService } from './app.service'; // Ensure this service is created
 import { Tourny } from '@prisma/client'; // Import your Prisma client types
-import { PrismaService } from './prisma.service'; // Ensure you have a Prisma service
+import { PrismaService } from './prisma/prisma.service'; // Ensure you have a Prisma service
 
 @Controller('tournies')
 export class AppController {
