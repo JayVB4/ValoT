@@ -15,9 +15,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './pages/LoginPages/Login'
-import Register from './pages/LoginPages/Register'
-import AppPage from './pages/LoginPages/AppPage'
+import Login from './Player-Web/pages/LoginPages/Login'
+import Register from './Player-Web/pages/LoginPages/Register'
+import AppPage from './Player-Web/pages/LoginPages/AppPage'
 import './index.css'
 
 const router = createBrowserRouter([

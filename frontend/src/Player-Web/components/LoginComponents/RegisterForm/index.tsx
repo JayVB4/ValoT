@@ -1,5 +1,5 @@
-import { Input } from "../../../components/LoginComponents/ui/input"
-import { Label } from "../../../components/LoginComponents/ui/label"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
 import { checkValidPassword } from "../../../utils/LoginUtils/password.utils";
 import { useState } from "react"
 import PasswordHelpHover from "../PasswordHelpHover";

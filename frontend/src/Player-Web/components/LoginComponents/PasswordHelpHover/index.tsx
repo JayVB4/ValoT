@@ -2,7 +2,7 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "../../../components/LoginComponents/ui/hover-card"
+} from "../ui/hover-card"
 import { CircleHelp } from "lucide-react";
 
 function PasswordHelpHover() {

@@ -8,7 +8,6 @@ declare module 'express' {
     user?: {
       id: string;      // Assuming `id` is a string, adjust if necessary
       email: string;   // Assuming you are also storing `email`
-
       username : string;
       // Add other fields you want to store in `user` here
     };
