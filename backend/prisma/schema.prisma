@@ -14,6 +14,8 @@ generator client {
 
 model Host {
   id         Int      @id @default(autoincrement())
+  username   String   @unique // Added username
+  email      String   @unique // Added email
   pass       String
   created_at DateTime @default(now())
   Tourny     Tourny[]
@@ -21,25 +23,18 @@ model Host {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  email     String   @unique
-  password  String   @db.VarChar(255)
-  status    Boolean  @default(true)
-  createdAt DateTime @default(now())
-
-  @@index([email])
-}
-
-model Player { // Renamed from User to Player
   id         Int      @id @default(autoincrement())
   team_id    Int      
-  username   String
+  username   String   @unique // Merged field
+  email      String   @unique // Merged field
+  password   String
   created_at DateTime @default(now())
   phone_no   Int
   discord    String
   role       Role     @default(USER)
   team       Team     @relation(fields: [team_id], references: [id])
+  status     Boolean  @default(true)
+  @@index([email])
 }
 
 model Tourny {
@@ -62,7 +57,7 @@ model Tourny {
 model Team {
   id         Int    @id @default(autoincrement())
   name       String 
-  players    Player[] // Changed from users to players
+  users      User[] // Changed from players to users
   reg_teams   RegTeams[]
   match_teams MatchTeams[]
 }
