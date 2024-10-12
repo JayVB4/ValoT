@@ -1,8 +1,8 @@
 // src/host/host.service.ts
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateHostDto } from 'src/aHost-backend/dto/createHost.dto';
+import { PrismaService } from '../../prisma/prisma.service';
+import { CreateHostDto } from '../../aHost-backend/dto/createHost.dto';
 import { Host } from '@prisma/client';
 
 @Injectable()

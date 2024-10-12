@@ -2,7 +2,7 @@ import { HostService } from './../host/host.service';
 import { Module } from '@nestjs/common';
 import { HostSignupController } from './signup.controller';
 import { HostSignupService } from './signup.service';
-import { PrismaService } from 'src/prisma/prisma.service'; // Import PrismaService
+import { PrismaService } from '../../prisma/prisma.service'; // Import PrismaService
 
 @Module({
   imports: [],

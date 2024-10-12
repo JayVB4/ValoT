@@ -19,7 +19,7 @@
 
 import { HostService } from './host.service';
 import { Body, Controller, Get, InternalServerErrorException, Post } from '@nestjs/common';
-import { CreateHostDto } from 'src/aHost-backend/dto/createHost.dto';
+import { CreateHostDto } from '../../aHost-backend/dto/createHost.dto';
 
 @Controller('host')
 export class HostController {

@@ -1,10 +1,10 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { HostGuard } from 'src/aHost-backend/HostSignin/host.gaurd';
+import { HostGuard } from '../../aHost-backend/HostSignin/host.gaurd';
 
-@Controller('api/host-profile')
+@Controller('host')
 export class HostProfileController {
   @UseGuards(HostGuard)
-  @Get()
+  @Get('profile')
   async profile() {
     return {
       error: false,

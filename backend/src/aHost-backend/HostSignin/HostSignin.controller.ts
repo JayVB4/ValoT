@@ -6,15 +6,15 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { SigninHostDto } from 'src/aHost-backend/dto/signinHost.dto'; // DTO for host sign-in
+import { SigninHostDto } from '../../aHost-backend/dto/signinHost.dto'; // DTO for host sign-in
 import { HostSigninService } from './HostSignin.service'; // Service for host sign-in
 
-@Controller('api/host-signin') // Endpoint for host sign-in
+@Controller('host') // Endpoint for host sign-in
 export class HostSigninController {
   constructor(private signinHostService: HostSigninService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post()
+  @Post('signin')
   async signIn(@Body() signinHostDto: SigninHostDto) {
     try {
       const res = await this.signinHostService.signIn(signinHostDto);

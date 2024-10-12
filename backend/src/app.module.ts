@@ -22,10 +22,10 @@ import { HostProfileModule } from './aHost-backend/profile/profile.module';
     SignupModule,
     SigninModule,
     ProfileModule,
-    // HostModule,
-    // HostSignupModule,
-    // HostSigninModule,
-    // HostProfileModule
+    HostModule,
+    HostSignupModule,
+    HostSigninModule,
+    HostProfileModule
     // Removed MongooseModule as Prisma will handle DB
   ],
   controllers: [AppController],

@@ -1,4 +1,4 @@
-import { CreateHostDto } from 'src/aHost-backend/dto/createHost.dto';
+import { CreateHostDto } from '../../aHost-backend/dto/createHost.dto';
 import {
   Body,
   Controller,
@@ -9,12 +9,13 @@ import {
 
 import { HostSignupService } from './signup.service';
 
-@Controller('api/host/signup')
+@Controller('host')
 export class HostSignupController {
   constructor(private hostSignupService: HostSignupService) {}
-  @Post()
+  @Post('signup')
   async create(@Body() createHostDto: CreateHostDto) {
     try {
+      console.log('aa', createHostDto);
       const res = await this.hostSignupService.signup(createHostDto);
       return {
         message: 'Host successfully signed-up',
@@ -22,19 +23,24 @@ export class HostSignupController {
         data: res,
       };
     } catch (error) {
-      if (error && error.errorResponse) {
-        if (error.code === 11000) {
-          throw new HttpException(
-            {
-              status: HttpStatus.BAD_REQUEST,
-              error: true,
-              message: 'Email already exists. Please use a different email',
-            },
-            HttpStatus.BAD_REQUEST,
-          );
+      if (error.code === 11000 || error.code == 'P2002') {
+        var msg = 'Unknown error occured'
+        if(error.meta.target == 'email'){
+          msg = 'Email already exists. Please use a different email'
         }
-      } else {
-        console.log("dontknow")
+        else if(error.meta.target == 'username'){
+          msg = 'Username already exists. Please use a different Username'
+        }
+        throw new HttpException(
+          {
+            status: HttpStatus.BAD_REQUEST,
+            error: true,
+            message: msg,
+          },
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      else {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,

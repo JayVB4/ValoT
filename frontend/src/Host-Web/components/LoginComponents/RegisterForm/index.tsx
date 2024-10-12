@@ -24,12 +24,12 @@ function RegisterForm() {
     setApiError(undefined);
     if (name && name.length > 0 && email && email.length > 0 && password && checkValidPassword(password)) {
       setIsLoading(true);
-      const res = await clientApiFetch("http://localhost:3000/api/host/signup", {
+      const res = await clientApiFetch("http://localhost:3000/host/signup", {
         method: 'POST',
         body: {
-          name: name,
+          username: name,
           email: email,
-          password: btoa(password)
+          pass: btoa(password)
         }
       })
       if (!res.error) {

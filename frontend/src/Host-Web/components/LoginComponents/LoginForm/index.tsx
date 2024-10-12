@@ -20,7 +20,7 @@ function LoginForm() {
     setApiError(undefined);
     if (email && email.length > 0 && password && password.length > 0) {
       setIsLoading(true);
-      const res = await clientApiFetch("http://localhost:3000/api/host-signin", {
+      const res = await clientApiFetch("http://localhost:3000/host/signin", {
         method: 'POST',
         body: {
           email: email,

@@ -4,8 +4,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { SigninHostDto } from 'src/aHost-backend/dto/signinHost.dto'; // Ensure this DTO is created
-import { HostService } from 'src/aHost-backend/host/host.service'; // Service for managing hosts
+import { SigninHostDto } from '../../aHost-backend/dto/signinHost.dto'; // Ensure this DTO is created
+import { HostService } from '../../aHost-backend/host/host.service'; // Service for managing hosts
 
 @Injectable()
 export class HostSigninService {

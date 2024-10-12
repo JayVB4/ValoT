@@ -25,7 +25,7 @@
 import { Module } from '@nestjs/common';
 import { HostSigninController } from './HostSignin.controller';
 import { HostSigninService } from './HostSignin.service'; 
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { HostService } from '../host/host.service';

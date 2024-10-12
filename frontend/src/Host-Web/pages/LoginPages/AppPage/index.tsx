@@ -9,7 +9,7 @@ function AppPage() {
   const navigate = useNavigate();             
   useEffect(() => {
     async function init(){
-      const res = await clientApiFetch("http://localhost:3000/api/host-profile", {
+      const res = await clientApiFetch("http://localhost:3000/host/profile", {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${fetchCookieToken()}`
