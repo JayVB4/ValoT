@@ -22,19 +22,27 @@ export class SignupController {
         data: res,
       };
     } catch (error) {
-      if (error && error.errorResponse) {
-        if (error.code === 11000) {
+      console.log('error', error.code ,error);
+      if (error) {
+        if (error.code === 11000 || error.code == 'P2002') {
+          var msg = 'Unknown error occured'
+          if(error.meta.target == 'email'){
+            msg = 'Email already exists. Please use a different email'
+          }
+          else if(error.meta.target == 'username'){
+            msg = 'Username already exists. Please use a different Username'
+          }
           throw new HttpException(
             {
               status: HttpStatus.BAD_REQUEST,
               error: true,
-              message: 'Email already exists. Please use a different email',
+              message: msg,
             },
             HttpStatus.BAD_REQUEST,
           );
         }
-      } else {
-        console.log('error', error);
+      } 
+      else {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
