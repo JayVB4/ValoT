@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { SigninHostDto } from 'src/aHost-backend/dto/signinHost.dto'; // Ensure this DTO is created
-import { HostService } from 'src/host/host.service'; // Service for managing hosts
+import { HostService } from 'src/aHost-backend/host/host.service'; // Service for managing hosts
 
 @Injectable()
 export class HostSigninService {
@@ -24,7 +24,7 @@ export class HostSigninService {
     }
     
     // Check password validity
-    if (host.password !== signinHostDto.password) {
+    if (host.pass !== signinHostDto.password) {
       throw new UnauthorizedException('Invalid credentials'); // Invalid password
     }
 
@@ -32,7 +32,7 @@ export class HostSigninService {
     const payload = { hostEmail: host.email, sub: host.id }; // Use host.id instead of hard-coded values
     return {
       access_token: await this.jwtService.signAsync(payload), // Generate JWT token
-      username: host.name, // Return host name
+      username: host.username, // Return host name
     };
   }
 }

@@ -1,17 +1,15 @@
-import { IsString, IsEmail, IsBoolean, IsOptional } from 'class-validator';
+import { IsString, IsEmail, IsOptional } from 'class-validator';
 
 export class CreateHostDto {
-  [x: string]: any;
   @IsString()
-  name: string; // Required: Admin's name
+  username: string; // Required: Host's username
 
   @IsEmail()
-  email: string; // Required: Admin's email
+  email: string; // Required: Host's email
 
   @IsString()
-  password: string; // Required: Admin's password
+  pass: string; // Required: Host's password
 
-  @IsBoolean()
-  @IsOptional() // Optional: Status can be omitted, defaults to true
-  status?: boolean;
+  @IsOptional() // Optional: Host's role can be omitted, defaults to HOST
+  role?: string;
 }

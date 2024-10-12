@@ -16,7 +16,7 @@ export class SignupService {
     const payload = { userEmail: user.email, sub: 1 };
     return {
       access_token: await this.jwtService.signAsync(payload),
-      username: user.name,
+      username: user.username,
     };
   }
-}
+} 

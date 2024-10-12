@@ -58,7 +58,7 @@ export class SigninService {
     const payload = { userEmail: user.email, sub: user.id }; // Use user.id instead of a hard-coded value
     return {
       access_token: await this.jwtService.signAsync(payload),
-      username: user.name,
+      username: user.username,
     };
   }
 }

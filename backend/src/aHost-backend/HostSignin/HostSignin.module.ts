@@ -24,11 +24,11 @@
 
 import { Module } from '@nestjs/common';
 import { HostSigninController } from './HostSignin.controller';
-
 import { HostSigninService } from './HostSignin.service'; 
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
+import { HostService } from '../host/host.service';
 
 @Module({
   imports: [
@@ -39,6 +39,6 @@ import { jwtConstants } from './constants';
     }),
   ],
   controllers: [HostSigninController],
-  providers: [PrismaService, UserService, HostSigninService], // Add PrismaService as a provider
+  providers: [PrismaService, HostService, HostSigninService], // Add PrismaService as a provider
 })
-export class SigninModule {}
+export class HostSigninModule {}

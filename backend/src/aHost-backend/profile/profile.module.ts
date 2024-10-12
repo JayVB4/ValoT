@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ProfileController } from './profile.controller';
+import { HostProfileController } from './profile.controller';
 import { HostGuard } from '../HostSignin/host.gaurd';
 
 @Module({
-  controllers: [ProfileController],
+  controllers: [HostProfileController],
   providers: [HostGuard],
 })
-export class ProfileModule {}
+export class HostProfileModule {}

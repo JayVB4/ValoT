@@ -1,8 +1,9 @@
-import { IsString, IsEmail, IsBoolean, IsOptional } from 'class-validator';
+// src/dto/createUser.dto.ts
+import { IsString, IsEmail, IsInt, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  name: string; // Required: User's name
+  username: string; // Required: User's username
 
   @IsEmail()
   email: string; // Required: User's email
@@ -10,7 +11,19 @@ export class CreateUserDto {
   @IsString()
   password: string; // Required: User's password
 
+  @IsOptional()
+  @IsInt()
+  phone_no: number; // Required: User's phone number
+
+  @IsOptional()
+  @IsString()
+  discord: string; // Required: User's Discord ID
+
   @IsBoolean()
-  @IsOptional() // Optional: Status can be omitted, defaults to true
-  status?: boolean; 
+  @IsOptional()
+  status?: boolean; // Optional: User's status
+
+  @IsInt()
+  @IsOptional()
+  team_id: number; // Required: User's team ID (assuming you have team management)
 }

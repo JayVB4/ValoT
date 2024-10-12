@@ -12,8 +12,9 @@ export class HostService {
   async create(createHostDto: CreateHostDto): Promise<Host> {
     return this.prisma.host.create({
       data: {
-        pass: createHostDto.pass,
-        // Map other fields if necessary
+        username: createHostDto.username,
+        email: createHostDto.email,
+        pass: createHostDto.pass, // Map other required fields
       },
     });
   }
