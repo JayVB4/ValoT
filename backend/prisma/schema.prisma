@@ -24,15 +24,15 @@ model Host {
 
 model User {
   id         Int      @id @default(autoincrement())
-  team_id    Int      
+  team_id    Int?     // Make optional
   username   String   @unique // Merged field
   email      String   @unique // Merged field
   password   String
   created_at DateTime @default(now())
-  phone_no   Int
-  discord    String
+  phone_no   Int?     // Make optional
+  discord    String?  // Make optional
   role       Role     @default(USER)
-  team       Team     @relation(fields: [team_id], references: [id])
+  team       Team?    @relation(fields: [team_id], references: [id]) // Make relation optional
   status     Boolean  @default(true)
   @@index([email])
 }

@@ -5,15 +5,16 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/dto/createUser.dto';
+import { CreateUserDto } from '../dto/createUser.dto';
 import { SignupService } from './signup.service';
 
-@Controller('api/signup')
+@Controller('api')
 export class SignupController {
   constructor(private signupService: SignupService) {}
-  @Post()
+  @Post('signup')
   async create(@Body() createUserDto: CreateUserDto) {
     try {
+      console.log('Received signup request with data:', createUserDto);
       const res = await this.signupService.signup(createUserDto);
       return {
         message: 'User successfully signed-up',
@@ -33,6 +34,7 @@ export class SignupController {
           );
         }
       } else {
+        console.log('error', error);
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,

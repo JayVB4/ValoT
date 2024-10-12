@@ -22,9 +22,9 @@
 // export class SigninModule {}
 import { Module } from '@nestjs/common';
 import { SigninController } from './signin.controller';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 import { SigninService } from './signin.service'; // Import PrismaService
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 

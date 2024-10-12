@@ -30,7 +30,7 @@
 
 // src/user/user.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from 'src/dto/createUser.dto';
 import { User } from '@prisma/client';
 import { hash } from 'bcrypt';

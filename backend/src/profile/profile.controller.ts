@@ -1,5 +1,5 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { SiginGaurd } from 'src/signin/signin.gaurd';
+import { SiginGaurd } from '../signin/signin.gaurd';
 
 @Controller('api/profile')
 export class ProfileController {

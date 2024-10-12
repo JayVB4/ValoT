@@ -6,17 +6,18 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { SigninUserDto } from 'src/dto/signinUser.dto';
+import { SigninUserDto } from '../dto/signinUser.dto';
 import { SigninService } from './signin.service';
 
-@Controller('api/signin')
+@Controller('api')
 export class SigninController {
   constructor(private signinService: SigninService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post()
+  @Post('signin')
   async findUser(@Body() signinUserDto: SigninUserDto) {
     try {
+      console.log('Received signin request with data:', signinUserDto);
       const res = await this.signinService.signIn(signinUserDto);
       return {
         message: 'User successfully signed in',
@@ -25,6 +26,7 @@ export class SigninController {
       };
     } catch (error) {
       if (error) {
+        console.log(error)
         if (error.status === 404) {
           throw new HttpException(
             {
