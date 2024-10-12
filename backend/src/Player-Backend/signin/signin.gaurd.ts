@@ -7,7 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { Request } from 'express';
-
+// same files have been used for siginguards and hostguards
 @Injectable()
 export class SiginGaurd implements CanActivate {
   constructor(private jwtService: JwtService) {}

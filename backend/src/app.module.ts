@@ -4,10 +4,10 @@ import { AppService } from './app.service';
 import { PrismaService } from './prisma/prisma.service'; // Import PrismaService
 
 
-import { UserModule } from './user/user.module';
-import { SignupModule } from './signup/signup.module';
-import { SigninModule } from './signin/signin.module';
-import { ProfileModule } from './profile/profile.module';
+import { UserModule } from './Player-Backend/user/user.module';
+import { SignupModule } from './Player-Backend/signup/signup.module';
+import { SigninModule } from './Player-Backend/signin/signin.module';
+import { ProfileModule } from './Player-Backend/profile/profile.module';
 
 
 import { HostModule } from './aHost-backend/host/host.module';

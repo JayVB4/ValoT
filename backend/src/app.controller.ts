@@ -23,6 +23,7 @@ export class AppController {
     });
   }
 
+
   // Create a new tourny
   @Post()
   async createTourny(@Body() tournyData: Omit<Tourny, 'id' | 'created_at'>): Promise<Tourny> {
