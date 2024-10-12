@@ -4,6 +4,7 @@ import { SiginGaurd } from '../signin/signin.gaurd';
 @Controller('api/profile')
 export class ProfileController {
   @UseGuards(SiginGaurd)
+  
   @Get()
   async profile() {
     return {
