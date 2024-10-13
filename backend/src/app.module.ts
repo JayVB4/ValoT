@@ -14,6 +14,11 @@ import { HostModule } from './aHost-backend/host/host.module';
 import { HostSignupModule } from './aHost-backend/signup/signup.module';
 import { HostSigninModule } from './aHost-backend/HostSignin/HostSignin.module';
 import { HostProfileModule } from './aHost-backend/profile/profile.module';
+import { TournyModule } from './tourny/tourny.module';
+import { TeamModule } from './team/team.module';
+import { MatchModule } from './match/match.module';
+import { RegTeamsModule } from './reg-teams/reg-teams.module';
+import { MatchTeamsModule } from './match-teams/match-teams.module';
 
 @Module({
   imports: [
@@ -25,7 +30,12 @@ import { HostProfileModule } from './aHost-backend/profile/profile.module';
     HostModule,
     HostSignupModule,
     HostSigninModule,
-    HostProfileModule
+    HostProfileModule,
+    TournyModule,
+    TeamModule,
+    MatchModule,
+    RegTeamsModule,
+    MatchTeamsModule
     // Removed MongooseModule as Prisma will handle DB
   ],
   controllers: [AppController],
