@@ -31,7 +31,7 @@
 // src/user/user.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { CreateUserDto } from '../dto/createUser.dto';
+import { CreateUserDto,UpdateUserDto } from '../dto/createUser.dto';
 import { User } from '@prisma/client';
 import { hash } from 'bcrypt';
 
@@ -56,9 +56,33 @@ export class UserService {
       },
     });
   }
+  
+  async findUsersByTeamId(teamId: number): Promise<User[]> {
+    return this.prisma.user.findMany({
+      where: {
+        team_id: teamId, // Filter users by team ID
+      },
+    });
+  }
 
   async findUserByEmail(email: string): Promise<User | null> {
     return this.prisma.user.findUnique({ where: { email } });
+  }
+
+  async update(sid: string, updateUserDto: UpdateUserDto) {
+    const id = parseInt(sid);
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
   }
 }
 

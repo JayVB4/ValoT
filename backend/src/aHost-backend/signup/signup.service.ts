@@ -13,7 +13,7 @@ export class HostSignupService {
   async signup(createHostDto: CreateHostDto): Promise<any> {
     const host = await this.hostService.create(createHostDto);
 
-    const payload = { hostEmail: host.email, sub: 1 };
+    const payload = { hostEmail: host.email, sub: host.id };
     return {
       access_token: await this.jwtService.signAsync(payload),
       hostname: host.username,
