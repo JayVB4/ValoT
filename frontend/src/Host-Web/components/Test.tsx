@@ -1,6 +1,7 @@
-// src/components/Test.tsx
-
 import React, { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
+import { fetchFromCookie } from '../utils/LoginUtils/user.utils';
 
 interface Tournament {
   id: number;
@@ -16,26 +17,32 @@ interface Tournament {
   prize_pool: number;
 }
 
+interface DecodedToken {
+  hostEmail: string;
+  sub: number; // This is where the host ID is stored
+}
+
 const Test: React.FC = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [rules, setRules] = useState('');
-  const [hostId, setHostId] = useState<number | string>(''); // Host ID should be a number
+  const [hostId, setHostId] = useState<number | string>(); // Host ID will be set automatically
   const [status, setStatus] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [teamSize, setTeamSize] = useState<number | string>(''); // Team size should be a number
-  const [prizePool, setPrizePool] = useState<number | string>(''); // Prize pool should be a number
+  const [teamSize, setTeamSize] = useState<number | string>('');
+  const [prizePool, setPrizePool] = useState<number | string>('');
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
 
   // Fetch tournaments when the component mounts
   useEffect(() => {
     fetchTournaments();
+    setHostIdFromToken(); // Automatically set host ID
   }, []);
 
   const fetchTournaments = async () => {
     try {
-      const response = await fetch('http://localhost:3000/tournies');
+      const response = await fetch('http://localhost:3000/tourny');
       if (!response.ok) {
         throw new Error('Failed to fetch tournaments');
       }
@@ -46,13 +53,22 @@ const Test: React.FC = () => {
     }
   };
 
+  // Function to decode the JWT and extract the host ID
+  const setHostIdFromToken = () => {
+    const token = Cookies.get('token');
+    if (token) {
+      const decoded: DecodedToken = jwtDecode(token);
+      setHostId(decoded.sub); // Automatically set host ID from the decoded token
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const tournamentData = {
       title,
       body,
       rules,
-      host_id: Number(hostId),
+      host_id: Number(hostId), // Host ID is now set automatically
       status,
       start_date: new Date(startDate),
       end_date: new Date(endDate),
@@ -61,10 +77,11 @@ const Test: React.FC = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/tournies', {
+      const response = await fetch('http://localhost:3000/tourny', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Add token in headers if needed
         },
         body: JSON.stringify(tournamentData),
       });
@@ -80,7 +97,6 @@ const Test: React.FC = () => {
       setTitle('');
       setBody('');
       setRules('');
-      setHostId('');
       setStatus('');
       setStartDate('');
       setEndDate('');
@@ -120,15 +136,6 @@ const Test: React.FC = () => {
           <textarea
             value={rules}
             onChange={(e) => setRules(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Host ID:</label>
-          <input
-            type="number"
-            value={hostId}
-            onChange={(e) => setHostId(e.target.value)}
             required
           />
         </div>
