@@ -14,9 +14,6 @@ function RegisterForm() {
   const [password, setPassword] = useState<string>('');
   const [username, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [phoneNo, setPhoneNo] = useState<string>(''); // Optional phone_no
-  const [discord, setDiscord] = useState<string>(''); // Optional discord
-  const [teamId, setTeamId] = useState<string>(''); // Optional team_id
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string | undefined>(undefined);
@@ -35,17 +32,6 @@ function RegisterForm() {
         email: email,
         password: btoa(password),
       };
-
-      // Include optional fields if they are provided
-      if (phoneNo) {
-        requestBody.phone_no = parseInt(phoneNo);
-      }
-      if (discord) {
-        requestBody.discord = discord;
-      }
-      if (teamId) {
-        requestBody.team_id = parseInt(teamId);
-      }
 
       // Make API request
       const res = await clientApiFetch("http://localhost:3000/api/signup", {
@@ -79,21 +65,6 @@ function RegisterForm() {
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="email">Email</Label>
         <Input type="email" id="email" required onChange={(e) => setEmail(e.target.value)} />
-      </div>
-
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="phone_no">Phone Number (Optional)</Label>
-        <Input type="text" id="phone_no" onChange={(e) => setPhoneNo(e.target.value)} />
-      </div>
-
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="discord">Discord ID (Optional)</Label>
-        <Input type="text" id="discord" onChange={(e) => setDiscord(e.target.value)} />
-      </div>
-
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="team_id">Team ID (Optional)</Label>
-        <Input type="text" id="team_id" onChange={(e) => setTeamId(e.target.value)} />
       </div>
 
       <div className="grid w-full max-w-sm items-center gap-1.5">
