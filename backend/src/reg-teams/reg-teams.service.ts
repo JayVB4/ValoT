@@ -16,4 +16,12 @@ export class RegTeamsService {
   async createRegTeam(regTeamData: any) {
     return this.prisma.regTeams.create({ data: regTeamData });
   }
+
+  async findRegTeamsByTourneyId(teamId: number){
+    const team_id = Number(teamId)
+    const regTeams = await this.prisma.regTeams.findMany({
+      where: { team_id },
+    });
+    return regTeams; // Return the found registered teams
+  }
 }

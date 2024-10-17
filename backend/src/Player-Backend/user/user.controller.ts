@@ -16,6 +16,11 @@ export class UserController {
     return 'user';
   }
 
+  @Get(':id') // Define the route for getting a user by ID
+  async findUserById(@Param('id') id: string){
+    return this.userService.findUserById(Number(id)); // Convert ID to number and call the service method
+  }
+
   @Get(':teamId') // Define a route to fetch users by team ID
   async findUsersByTeam(@Param('teamId') teamId: string){
     return this.userService.findUsersByTeamId(Number(teamId));

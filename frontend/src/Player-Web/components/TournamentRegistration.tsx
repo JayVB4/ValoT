@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 interface Tournament {
   id: number;
@@ -17,12 +18,14 @@ interface Tournament {
 
 const TournamentRegistration: React.FC = () => {
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
-
+  const [userId,setUserId] =useState<string|undefined>();
+  const [teamId,setTeamId] =useState();
   // Fetch tournaments when the component mounts
   useEffect(() => {
     fetchTournaments();
+    fetchTeamAndUserId();
   }, []);
-
+  
   const fetchTournaments = async () => {
     try {
       const response = await fetch('http://localhost:3000/tournies');
@@ -36,21 +39,43 @@ const TournamentRegistration: React.FC = () => {
     }
   };
 
+  const fetchTeamAndUserId = async () => {
+    try {
+      const token = Cookies.get('token'); // Get the token from cookies
+      if(token){
+        setUserId(jwtDecode(token).sub);
+        const response = await fetch(`http://localhost:3000/user/${jwtDecode(token).sub}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch user');
+        }
+        const data = await response.json();
+        console.log(data["team_id"])
+        setTeamId(data["team_id"]);
+      }
+    } catch (error) {
+      console.error('Error fetching tournaments:', error);
+    }
+  };
+  
+  
   const handleRegister = async (tournamentId: number) => {
     const token = Cookies.get('token'); // Get the token from cookies
 
-    if (!token) {
-      alert('Please log in to register for a tournament.');
+    const response = await fetch(`http://localhost:3000/regTeams/team/${teamId}`);
+    const data = await response.json();
+    console.log("AA",data)
+    if(data.length>0){
+      alert('Already registered');
       return;
     }
 
     const registrationData = {
-      tournament_id: tournamentId,
-      // Add any other registration details here
+      tourny_id: tournamentId,
+      team_id: teamId
     };
 
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('http://localhost:3000/regTeams', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
